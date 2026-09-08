@@ -1,0 +1,1 @@
+{"name":"family-tree-of-flags","private":true,"version":"5.0.0","type":"commonjs","scripts":{"dev":"vite --config vite.config.mjs","validate":"node scripts/validate.cjs","offline":"python scripts/make-offline.py"},"devDependencies":{"vite":"^7.1.0"},"dependencies":{"elkjs":"0.11.0"}}

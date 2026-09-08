@@ -1,0 +1,7 @@
+node_modules/
+.openai/preview*
+__pycache__/
+*.pyc
+
+dist/_qa/
+A-Vexillological-Genealogy-v*.html

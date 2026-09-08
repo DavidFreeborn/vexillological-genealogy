@@ -19,6 +19,9 @@ const types = {
   family: { label: "Shared tradition", color: "#637d90", dash: "10 5" },
   similarity: { label: "Lookalike", color: "#b22d77", dash: "1 13" },
 };
+const initialControls = [...document.querySelectorAll('.workspace button, .workspace input, .workspace select')];
+initialControls.forEach(control => { control.disabled = true; });
+document.querySelector('.workspace').setAttribute('aria-busy', 'true');
 let presets = null;
 let edgeIndexes = new WeakMap(),
   lineageIndexes = {
@@ -52,12 +55,12 @@ const date = (n) =>
 let scene = { nodes: [], edges: [], panels: [] },
   renderVersion = 0;
 const engine = new ELK({
-    workerUrl:
+    workerFactory: () => new Worker(
       typeof OFFLINE_WORKER_SOURCE !== "undefined"
         ? URL.createObjectURL(
             new Blob([OFFLINE_WORKER_SOURCE], { type: "text/javascript" }),
           )
-        : "elk-worker.min.js",
+        : "elk-worker.min.js"),
   }),
   layoutCache = new Map();
 function arrange(kind) {
@@ -771,7 +774,7 @@ Promise.all([
     if (!r.ok) throw Error("Data unavailable");
     return r.json();
   })
-  .then((d) => {
+  .then(async (d) => {
     data = d;
     edgeIndexes = new WeakMap(d.edges.map((e, i) => [e, i]));
     byId = new Map(d.nodes.map((n) => [n.id, n]));
@@ -799,10 +802,13 @@ Promise.all([
       state.focus = hash.get("flag");
       state.selected = state.focus;
     }
-    render();
+    await render();
     if (state.selected) select(state.selected);
+    initialControls.forEach(control => { control.disabled = false; });
+    document.querySelector('.workspace').removeAttribute('aria-busy');
   })
   .catch((e) => {
+    document.querySelector('.workspace').removeAttribute('aria-busy');
     $("view-title").textContent = "The atlas could not load";
     $("view-description").textContent = "Please reload the page to try again.";
     console.error(e);

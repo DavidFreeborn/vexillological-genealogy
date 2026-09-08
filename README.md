@@ -1,5 +1,7 @@
 # A Vexillological Genealogy
 
+[Live atlas](https://davidfreeborn.github.io/vexillological-genealogy/) · [Personal website](https://www.davidpeterwallisfreeborn.com/fun/vexillological-genealogy/) · [Publication checks](PUBLISHING-CHECKS.md)
+
 Static interactive atlas in `dist/`. Run `npm install` and `npm run dev` for the development preview, or serve `dist/` directly. Production needs no build step. `A-Vexillological-Genealogy-v10.html` is the self-contained edition generated with `python scripts/make-offline.py`.
 
 479 flag and emblem records cover all 195 UN member/observer national flags, selected associated and disputed states, regional flags, movements and historical designs. 464 sourced relationships distinguish influence, redesign, shared traditions, resemblance and uncertain links. Dates describe the principal design or represented period; historical reconstructions are identified individually.

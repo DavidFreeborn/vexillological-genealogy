@@ -943,3 +943,5 @@ main {
     overflow-wrap: anywhere;
   }
 }
+
+body{--serif:"EB Garamond",Georgia,serif;} h1,h2,h3,.model-description{font-family:var(--tool-serif,"EB Garamond",Georgia,serif)}
